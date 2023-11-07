@@ -17,7 +17,6 @@ public class DBHelper extends SQLiteOpenHelper {
         // factory : chưa sử dụng thì để là null
 
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) { // Phương thức dùng để khởi tạo bảng có trong dự án
         // có thể tạo 1 hoặc nhiều bảng tại đây,
@@ -26,6 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // thực thi câu lệnh
         db.execSQL(nhanVienSQL);
         // Khởi tạo bảng sản phẩm
+
 
     }
 
