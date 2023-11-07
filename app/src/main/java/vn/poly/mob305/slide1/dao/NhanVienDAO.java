@@ -2,11 +2,15 @@ package vn.poly.mob305.slide1.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import vn.poly.mob305.slide1.db.DBHelper;
+import vn.poly.mob305.slide1.model.NhanVien;
 
 public class NhanVienDAO {
 
@@ -65,6 +69,41 @@ public class NhanVienDAO {
             Toast.makeText(context, "SUA Nhan Vien KHONG Thanh Cong!!!", Toast.LENGTH_SHORT).show();
         }
     }
+    public void xoaNV(String taikhoan){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        long ketqua = db.delete("NhanVien","tendangnhap = ?",new String[]{taikhoan});
+        if (ketqua>0){
+            // thong bao thanh cong
+            Toast.makeText(context, "XOA Nhan Vien Thanh Cong!!!", Toast.LENGTH_SHORT).show();
+        }else {
+            // thong bao fail !!!!
+            Toast.makeText(context, "XOA Nhan Vien KHONG Thanh Cong!!!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<NhanVien> danhSachNhanVien(){
+        ArrayList<NhanVien> nhanVienArrayList = new ArrayList<>();
+        // viet cau lenh truy van
+        String truyvan = "SELECT * FROM NhanVien";
+        // null tức là lấy toàn bộ giá trị các cột
+        Cursor ketqua = dbHelper.getWritableDatabase().rawQuery(truyvan,null);
+        if (ketqua.getCount() > 0){
+            ketqua.moveToFirst(); // cho chương trình di chuyển đến vị trí đầu tiên
+            while (ketqua.moveToNext()){ // kiểm tra điều kiện di chuyển đến vị trí tiếp theo
+                NhanVien nv = new NhanVien();
+                // giá trị đc tính theo thứ tự khi khai báo bảng
+                nv.setTendangnhap(ketqua.getString(0)); // lấy giá trị theo vị trí đầu tiên 0
+                nv.setMatkhau(ketqua.getString(1));
+                nv.setHoten(ketqua.getString(2));
+                nhanVienArrayList.add(nv); // sau khi lấy được giá trị thì bỏ vào mảng nhân viên
+            }
+            // ket thuc vong while
+            ketqua.close();
+        }
+        return nhanVienArrayList;
+    }
+
+
     public void dangNhapNV(){
     }
 
