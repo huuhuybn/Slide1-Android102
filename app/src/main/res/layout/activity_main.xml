@@ -48,4 +48,12 @@
         android:layout_height="wrap_content"
         android:text="List" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListNhanVien"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>

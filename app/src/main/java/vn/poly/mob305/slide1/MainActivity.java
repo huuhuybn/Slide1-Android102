@@ -1,6 +1,9 @@
 package vn.poly.mob305.slide1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import vn.poly.mob305.slide1.adapter.NhanVienAdapter;
 import vn.poly.mob305.slide1.dao.NhanVienDAO;
 import vn.poly.mob305.slide1.db.DBHelper;
 import vn.poly.mob305.slide1.model.NhanVien;
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // khởi tạo class DBHelper để sử dụng
         // có thể khởi tạo class DBHelper ở bất kì đâu trên ứng dụng Android
         // miễn là chúng ta có tham số Context để truyền vào !!!!
@@ -82,7 +87,39 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
             // hien thi danh sach nhan vien len ListView hoac
-            // RecyclerView
+
+
+            // 1. ListView trên xml giao diện
+            // 2. Adapter - qui định giao diện cho 1 hàng trên listView
+                         // - qui định cách phân phối dữ liệu vào ListView
+                // notifyDataSetChanged();
+            // BaseAdapter, ArrayAdapter .....
+
+            //// RecyclerView
+            // 1.RecyclerView trên xml giao diện
+            // 2.Adapter
+            // 3.ViewHolder - ViewHolder hoạt động như cơ chế Cache giúp
+            // cuộn mượt hơn !!!!
+            // 4.Hỗ trợ hiển thị dạng ngang, dọc hoặc lưới thông qua
+            // LayoutManager
+            // 5. Hỗ trợ nhiều hơn các câu lệnh liên quan tới chức năng
+            // notifyDataSetChanged();
+            // 6. ko hỗ trợ pt OnItemClickListener ??????
+            RecyclerView rvListNV =
+                    findViewById(R.id.rvListNhanVien);
+            NhanVienAdapter vienAdapter = new NhanVienAdapter(nhanVienArrayList);
+            rvListNV.setAdapter(vienAdapter);
+            // hien thi theo hang doc!!!!
+            LinearLayoutManager ln = new LinearLayoutManager(MainActivity.this
+                    ,RecyclerView.HORIZONTAL,false);
+
+            GridLayoutManager gm = new GridLayoutManager(
+                    MainActivity.this,
+                    3,
+                    RecyclerView.VERTICAL,false);
+            rvListNV.setLayoutManager(gm);
+
+
 
 
         });
