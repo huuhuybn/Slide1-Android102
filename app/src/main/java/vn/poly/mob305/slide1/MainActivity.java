@@ -1,13 +1,17 @@
 package vn.poly.mob305.slide1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,8 +47,53 @@ public class MainActivity extends AppCompatActivity {
             String password = edtPassword.getText().toString();
             String fullname = edtFullname.getText().toString();
 
-            NhanVienDAO nhanVienDAO = new NhanVienDAO(MainActivity.this);
-            nhanVienDAO.dangKyNV(username,password,fullname);
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle(getString(R.string.main_title));
+            //builder.setMessage(getString(R.string.main_message));
+
+            String fruits[] = {"Apple","Pine","Coconut"};
+
+            /*builder.setItems(fruits, (dialog, which) -> {
+                Toast.makeText(this, fruits[which],
+                        Toast.LENGTH_SHORT).show();
+            });*/
+
+           /* builder.setMultiChoiceItems(fruits, null,
+                    (dialog, which, isChecked) -> {
+                        Toast.makeText(this,
+                                fruits[which] + " : " + isChecked, Toast.LENGTH_SHORT).show();
+            });
+
+            builder.setPositiveButton("Thoát", (dialog, which) -> {
+                dialog.dismiss();
+            });
+            builder.setNegativeButton("Thêm", (dialog,which) ->{
+                NhanVienDAO nhanVienDAO = new NhanVienDAO(MainActivity.this);
+                nhanVienDAO.dangKyNV(username,password,fullname);
+            });*/
+
+            View dialogCustom = LayoutInflater.from(this)
+                    .inflate(R.layout.dialog_custom,null);
+            builder.setView(dialogCustom);
+
+            // dialogCustom
+            EditText edtInfo = dialogCustom.findViewById(R.id.edtInfo);
+            CheckBox cbSave = dialogCustom.findViewById(R.id.cbSave);
+
+            builder.setNeutralButton("TEST", (dialog, v) ->{
+                Toast.makeText(this, edtInfo.getText().toString(),
+                        Toast.LENGTH_SHORT).show();
+            });
+
+            builder.setCancelable(false);
+
+            builder.show();
+
+
+
+
+
         });
 
         findViewById(R.id.btnUpdate).setOnClickListener(v ->{
@@ -118,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
                     3,
                     RecyclerView.VERTICAL,false);
             rvListNV.setLayoutManager(gm);
-
 
 
 

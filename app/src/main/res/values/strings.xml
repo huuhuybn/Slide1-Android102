@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Slide1</string>
+    <string name="main_title">Tiêu Đề</string>
+    <string name="main_message">"Bạn có chắc chắn muốn thêm không ? "</string>
 </resources>
