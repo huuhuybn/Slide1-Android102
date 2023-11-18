@@ -2,6 +2,7 @@ package vn.poly.mob305.slide1;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import vn.poly.mob305.slide1.adapter.NhanVienAdapter;
 import vn.poly.mob305.slide1.dao.NhanVienDAO;
 import vn.poly.mob305.slide1.db.DBHelper;
+import vn.poly.mob305.slide1.fragments.Demo2Fragment;
 import vn.poly.mob305.slide1.model.NhanVien;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Demo2Fragment demo2 = new Demo2Fragment();
+        FragmentTransaction trans = getSupportFragmentManager()
+                .beginTransaction();
+        trans.replace(R.id.container,demo2).commit();
 
         // khởi tạo class DBHelper để sử dụng
         // có thể khởi tạo class DBHelper ở bất kì đâu trên ứng dụng Android

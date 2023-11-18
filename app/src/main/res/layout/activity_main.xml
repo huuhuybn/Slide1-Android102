@@ -7,6 +7,22 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <fragment
+        android:id="@+id/demo"
+        android:name="vn.poly.mob305.slide1.fragments.DemoFragment"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <fragment
+        android:id="@+id/demo2"
+        android:name="vn.poly.mob305.slide1.fragments.Demo2Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 
     <EditText
         android:id="@+id/edtUsername"
